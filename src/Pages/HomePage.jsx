@@ -95,28 +95,46 @@ const HomePage = () => {
   return (
     <div className="min-h-screen bg-white font-inter">
       {/* Header */}
-      <nav className="bg-white shadow p-4 sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold text-indigo-600">
-            Streakly
-          </Link>
-          <div className="space-x-6 hidden md:block">
-            <Link to="/" className="text-gray-600 hover:text-indigo-600">
-              Home
-            </Link>
-            <Link to="/about" className="text-gray-600 hover:text-indigo-600">
-              About
-            </Link>
-            <Link to="/contact" className="text-gray-600 hover:text-indigo-600">
-              Contact
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <motion.header
+        className="sticky top-0 z-50 bg-white shadow-md p-6 flex justify-between items-center max-w-7xl mx-auto"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.5 }}
+      >
+        <h1 className="text-3xl font-bold text-indigo-600">Streakly</h1>
+        <nav className="space-x-8">
+          {/* <Link to="/home" className="text-gray-600 hover:text-indigo-600 transition-colors" >Home</Link> */}
+          <a
+            href="#top"
+            className="text-gray-600 hover:text-indigo-600 transition-colors"
+          >
+            Home
+          </a>
+          <a
+            href="#grid"
+            className="text-gray-600 hover:text-indigo-600 transition-colors"
+          >
+            Streaks
+          </a>
+          <a
+            href="#chart"
+            className="text-gray-600 hover:text-indigo-600 transition-colors"
+          >
+            Trends
+          </a>
+          <a
+            href="/"
+            className="text-gray-600 hover:text-indigo-600 transition-colors"
+          >
+            Exit
+          </a>
+        </nav>
+      </motion.header>
 
       <main className="p-6 max-w-4xl mx-auto space-y-12">
         {/* Hero */}
         <motion.section
+        id="top"
           className="text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -193,6 +211,7 @@ const HomePage = () => {
 
         {/* Grid */}
         <motion.div
+          id="grid"
           className="bg-gray-50 p-6 rounded-lg shadow"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -203,6 +222,7 @@ const HomePage = () => {
 
         {/* Trends */}
         <motion.div
+          id="chart"
           className="bg-gray-50 p-6 rounded-lg shadow"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
