@@ -103,7 +103,7 @@ const HomePage = () => {
       >
         <h1 className="text-3xl font-bold text-indigo-600">Streakly</h1>
         <nav className="space-x-8">
-          {/* <Link to="/home" className="text-gray-600 hover:text-indigo-600 transition-colors" >Home</Link> */}
+         
           <a
             href="#top"
             className="text-gray-600 hover:text-indigo-600 transition-colors"

@@ -16,7 +16,7 @@ const CardSwipe = ({ tasks, setTasks, setStreak, setDailyCompletions, grid, setG
       localStorage.setItem("streak", newStreak.toString());
       setStreak(newStreak);
 
-      // 💡 Add to grid
+      // Add to grid
       const newGrid = [...grid];
       const emptyIndex = newGrid.findIndex((pixel) => !pixel);
       if (emptyIndex !== -1) {
