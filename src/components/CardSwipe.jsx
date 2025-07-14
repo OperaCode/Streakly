@@ -1,7 +1,7 @@
 import React from "react";
 import TinderCard from "react-tinder-card";
 
-const CardSwipe = ({ tasks, setTasks, setStreak, setDailyCompletions }) => {
+const CardSwipe = ({ tasks, setTasks, setStreak, setDailyCompletions, grid, setGrid }) => {
   const onSwipe = (direction, task, index) => {
     if (direction === "right") {
       const todayIndex = new Date().getDay();

@@ -22,7 +22,7 @@ Git
 Steps
 
 Clone the Repository:
-git clone https://github.com/<your-username>/streakly.git
+git clone https://github.com/OperaCode/Streakly.git
 cd streakly
 
 Install Dependencies:

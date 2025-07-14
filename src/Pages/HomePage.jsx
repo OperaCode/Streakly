@@ -134,7 +134,7 @@ const HomePage = () => {
       <main className="p-6 max-w-4xl mx-auto space-y-12">
         {/* Hero */}
         <motion.section
-        id="top"
+          id="top"
           className="text-center"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
