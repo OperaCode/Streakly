@@ -1,6 +1,9 @@
-import React from 'react'
+import React,{useState} from 'react'
 
-const Grid = ({grid,streak,missedStreaks}) => {
+const Grid = ({streak,missedStreaks}) => {
+    const [grid, setGrid] = useState(
+        JSON.parse(localStorage.getItem("grid")) || Array(100).fill(null)
+      );
   return (
     <div>
       <h2 className="text-2xl font-bold text-center text-indigo-700 mb-4">Progress Grid</h2>

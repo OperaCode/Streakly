@@ -5,7 +5,8 @@ import Chart from "../components/Chart";
 import Grid from "../components/Grid";
 import CardSwipe from "../components/CardSwipe";
 
-const Home = () => {
+
+const HomePage = () => {
   const [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem("tasks")) || []
   );
@@ -15,9 +16,7 @@ const Home = () => {
     timeFrame: "",
     id: null,
   });
-  const [grid, setGrid] = useState(
-    JSON.parse(localStorage.getItem("grid")) || Array(100).fill(null)
-  );
+  
   const [streak, setStreak] = useState(
     Number(localStorage.getItem("streak")) || 0
   );
@@ -182,7 +181,7 @@ const Home = () => {
           transition={{ duration: 0.5, delay: 0.6 }}
         >
           {/* grid component */}
-          <Grid grid={grid} streak={streak} missedStreaks={missedStreaks} />
+          <Grid  streak={streak} missedStreaks={missedStreaks} />
 
         </motion.div>
 
@@ -203,6 +202,6 @@ const Home = () => {
       </footer>
     </div>
   );
-};
+}
 
-export default Home;
+export default HomePage
