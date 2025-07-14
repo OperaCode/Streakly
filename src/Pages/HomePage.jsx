@@ -5,7 +5,6 @@ import Chart from "../components/Chart";
 import Grid from "../components/Grid";
 import CardSwipe from "../components/CardSwipe";
 
-
 const HomePage = () => {
   const [tasks, setTasks] = useState(
     JSON.parse(localStorage.getItem("tasks")) || []
@@ -14,9 +13,12 @@ const HomePage = () => {
     topic: "",
     description: "",
     timeFrame: "",
-    id: null,
   });
-  
+
+  const [grid, setGrid] = useState(
+    JSON.parse(localStorage.getItem("grid")) || Array(100).fill(null)
+  );
+
   const [streak, setStreak] = useState(
     Number(localStorage.getItem("streak")) || 0
   );
@@ -52,9 +54,8 @@ const HomePage = () => {
     const checkOverdueTasks = () => {
       const now = new Date();
       const updatedTasks = tasks.filter((task) => {
-        const taskTime = new Date(task.timeFrame);
+        const taskTime = new Date(`1970-01-01T${task.timeFrame}:00`);
         if (now > taskTime) {
-          // Task is overdue – reset streak, increment missedStreaks
           setStreak(0);
           localStorage.setItem("streak", "0");
 
@@ -63,10 +64,9 @@ const HomePage = () => {
           localStorage.setItem("missedStreaks", newMissed.toString());
           return false;
         }
-        return true; // Keep task if not overdue
+        return true;
       });
 
-      // Update tasks state and localStorage
       setTasks(updatedTasks);
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
     };
@@ -80,15 +80,15 @@ const HomePage = () => {
     setNewTask((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Add Task
   const addTask = () => {
     if (newTask.topic && newTask.description && newTask.timeFrame) {
-      const updatedTasks = [...tasks, { ...newTask, id: Date.now() }];
+      const taskWithId = { ...newTask, id: Date.now() };
+      const updatedTasks = [...tasks, taskWithId];
       setTasks(updatedTasks);
       localStorage.setItem("tasks", JSON.stringify(updatedTasks));
-      setNewTask({ topic: "", description: "", timeFrame: "", id: null });
+      setNewTask({ topic: "", description: "", timeFrame: "" });
     } else {
-      toast.error("Please fill in all fields");
+      alert("Please fill in all fields");
     }
   };
 
@@ -141,17 +141,30 @@ const HomePage = () => {
             Add New Task
           </h2>
           <div className="grid md:grid-cols-4 gap-4">
-            {["topic", "description", "timeFrame"].map((field) => (
-              <input
-                key={field}
-                type="text"
-                name={field}
-                value={newTask[field]}
-                onChange={handleInputChange}
-                placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-                className="border p-3 rounded focus:ring focus:ring-indigo-200"
-              />
-            ))}
+            <input
+              type="text"
+              name="topic"
+              value={newTask.topic}
+              onChange={handleInputChange}
+              placeholder="Topic"
+              className="border p-3 rounded focus:ring focus:ring-indigo-200"
+            />
+            <input
+              type="text"
+              name="description"
+              value={newTask.description}
+              onChange={handleInputChange}
+              placeholder="Description (comma separated)"
+              className="border p-3 rounded focus:ring focus:ring-indigo-200"
+            />
+            <input
+              type="time"
+              name="timeFrame"
+              value={newTask.timeFrame}
+              onChange={handleInputChange}
+              placeholder="Time"
+              className="border p-3 rounded focus:ring focus:ring-indigo-200"
+            />
             <button
               onClick={addTask}
               className="bg-indigo-600 text-white rounded p-3 hover:bg-indigo-700 transition"
@@ -168,9 +181,14 @@ const HomePage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
-          {/* swipe component */}
-          <CardSwipe tasks={tasks} />
-
+          <CardSwipe
+            tasks={tasks}
+            setTasks={setTasks}
+            setStreak={setStreak}
+            setDailyCompletions={setDailyCompletions}
+            grid={grid}
+            setGrid={setGrid}
+          />
         </motion.div>
 
         {/* Grid */}
@@ -180,9 +198,7 @@ const HomePage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
-          {/* grid component */}
-          <Grid  streak={streak} missedStreaks={missedStreaks} />
-
+          <Grid grid={grid} streak={streak} missedStreaks={missedStreaks} />
         </motion.div>
 
         {/* Trends */}
@@ -192,7 +208,6 @@ const HomePage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.8 }}
         >
-          {/* Chart component */}
           <Chart dailyCompletions={dailyCompletions} />
         </motion.div>
       </main>
@@ -202,6 +217,6 @@ const HomePage = () => {
       </footer>
     </div>
   );
-}
+};
 
-export default HomePage
+export default HomePage;

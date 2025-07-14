@@ -1,6 +1,5 @@
 import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
-// const { motion, useAnimation } = window.FramerMotion;
 import {motion, useAnimation} from "framer-motion"
 
 const LandingPage = () => {
@@ -21,9 +20,9 @@ const LandingPage = () => {
           >
             <h1 className="text-3xl font-bold text-indigo-600">Streakly</h1>
             <nav className="space-x-8">
-              <Link to="/home" className="text-gray-600 hover:text-indigo-600 transition-colors" aria-label="Home page">Home</Link>
-              <Link to="/about" className="text-gray-600 hover:text-indigo-600 transition-colors" aria-label="About page">About</Link>
-              <Link to="/contact" className="text-gray-600 hover:text-indigo-600 transition-colors" aria-label="Contact page">Contact</Link>
+              <Link to="/home" className="text-gray-600 hover:text-indigo-600 transition-colors" >Home</Link>
+              <Link to="/#features" className="text-gray-600 hover:text-indigo-600 transition-colors" >How it Works</Link>
+              <Link to="/contact" className="text-gray-600 hover:text-indigo-600 transition-colors" >Testimonials</Link>
             </nav>
           </motion.header>
 
@@ -60,7 +59,7 @@ const LandingPage = () => {
           </section>
 
           {/* Features Section */}
-          <section className="py-24 bg-white">
+          <section id='#features' className="py-24 bg-white">
             <div className="max-w-7xl mx-auto grid md:grid-cols-3 gap-12 px-6">
               {[
                 { icon: '🔥', title: 'Daily Streaks', desc: 'Stay consistent with daily streak tracking that motivates you to keep showing up.' },
